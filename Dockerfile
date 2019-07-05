@@ -2,21 +2,23 @@ FROM golang:1.12-alpine
 
 ENV GOPATH=/go
 
+RUN apk add -u curl ca-certificates git
+RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+
 WORKDIR /go/src/faber-api/
 COPY . ./
 
-RUN apk add -u curl ca-certificates
-RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-RUN dep ensure
+RUN dep ensure -v
 RUN CGO_ENABLED=0 go build
 
-FROM scratch
+FROM alpine
 
+RUN apk add -u ca-certificates
 COPY --from=0 /go/src/faber-api/faber-api /usr/local/bin/faber-api
 
 ENV GIN_MODE=release
 
-EXPOSE 80
-ENV PORT=80
+EXPOSE 8080
+ENV PORT=8080
 
 CMD ["/usr/local/bin/faber-api"]
