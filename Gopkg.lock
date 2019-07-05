@@ -21,7 +21,7 @@
   version = "v2.7.1"
 
 [[projects]]
-  digest = "1:c4c7064c2c67a0a00815918bae489dd62cd88d859d24c95115d69b00b3d33334"
+  digest = "1:1c58bebf175e3c51fbed39f60dfc1cbea68df7b3a8062678661a30b68ee5fbc1"
   name = "github.com/docker/docker"
   packages = [
     "api/types",
@@ -38,7 +38,6 @@
     "api/types/time",
     "api/types/versions",
     "api/types/volume",
-    "client",
     "pkg/tlsconfig",
   ]
   pruneopts = "UT"
@@ -109,6 +108,14 @@
   pruneopts = "UT"
   revision = "1311e847b0cb909da63b5fecfb5370aa66236465"
   version = "v0.0.8"
+
+[[projects]]
+  digest = "1:4b17b21e0f462ee50ca92f81cadabf531f7c4a2d3590cc55b0a9d081059ca61e"
+  name = "github.com/moby/moby"
+  packages = ["client"]
+  pruneopts = "UT"
+  revision = "092cba3727bb9b4a2f0e922cd6c0f93ea270e363"
+  version = "v1.13.1"
 
 [[projects]]
   digest = "1:33422d238f147d247752996a26574ac48dcf472976eda7f5134015f06bf16563"
@@ -196,8 +203,9 @@
   input-imports = [
     "github.com/docker/docker/api/types",
     "github.com/docker/docker/api/types/container",
-    "github.com/docker/docker/client",
     "github.com/gin-gonic/gin",
+    "github.com/moby/moby/client",
+    "golang.org/x/net/context",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
