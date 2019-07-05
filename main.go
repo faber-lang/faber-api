@@ -79,7 +79,7 @@ func compile(ctx context.Context, cli *client.Client, tag, code string) (*Result
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: imageRef,
-		Cmd: []string{"cat", "/faber.fab"},
+		Cmd: []string{"fabrun", "/faber.fab"},
 		Tty: true,
 	}, nil, nil, "")
 	if err != nil {
