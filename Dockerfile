@@ -21,4 +21,6 @@ ENV GIN_MODE=release
 EXPOSE 8080
 ENV PORT=8080
 
-CMD ["/usr/local/bin/faber-api"]
+WORKDIR /tmp
+
+ENTRYPOINT ["/usr/local/bin/faber-api"]
