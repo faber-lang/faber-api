@@ -11,9 +11,9 @@ COPY . ./
 RUN dep ensure -v
 RUN CGO_ENABLED=0 go build
 
-FROM alpine
+FROM scratch
 
-RUN apk add -u ca-certificates
+COPY --from=0 /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=0 /go/src/faber-api/faber-api /usr/local/bin/faber-api
 
 ENV GIN_MODE=release
