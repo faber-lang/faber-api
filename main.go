@@ -14,6 +14,7 @@ import (
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types"
 	"golang.org/x/net/context"
+	units "github.com/docker/go-units"
 )
 
 type Options struct {
@@ -80,8 +81,20 @@ func compile(ctx context.Context, cli *client.Client, tag, code string) (*Result
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: imageRef,
 		Cmd: []string{"fabrun", "/faber.fab"},
-		Tty: true,
-	}, nil, nil, "")
+	}, &container.HostConfig{
+		Resources: container.Resources{
+			Memory: 10000000,
+			CPUPeriod: 1000000,
+			CPUQuota: 200000,
+			Ulimits: []*units.Ulimit{&units.Ulimit{
+				Name: "cpu",
+				Soft: 1,
+				Hard: 1,
+			}},
+		},
+		Privileged: false,
+		NetworkMode: "none",
+	}, nil, "")
 	if err != nil {
 		return nil, err
 	}
