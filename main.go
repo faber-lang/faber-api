@@ -20,12 +20,14 @@ func main() {
 	cli, err := client.NewEnvClient()
 	if err != nil {
 		log.Fatalf("%v", err)
+		return
 	}
 
 	url := "https://registry-1.docker.io/"
 	hub, err := registry.New(url, "", "")
 	if err != nil {
 		log.Fatalf("%v", err)
+		return
 	}
 
 	r := gin.Default()
