@@ -146,10 +146,12 @@ func main() {
 		var options Options
 		if err := c.ShouldBind(&options); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
 		}
 		res, err := compile(ctx, cli, options.Tag, options.Code)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
 		}
 		c.JSON(200, res)
 	})
