@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/moby/moby/client"
 	"golang.org/x/net/context"
+	"github.com/heroku/docker-registry-client/registry"
 )
 
 type Options struct {
@@ -17,6 +18,12 @@ type Options struct {
 func main() {
 	ctx := context.Background()
 	cli, err := client.NewEnvClient()
+	if err != nil {
+		log.Fatalf("%v", err)
+	}
+
+	url := "https://registry-1.docker.io/"
+	hub, err := registry.New(url, "", "")
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
@@ -34,6 +41,14 @@ func main() {
 			return
 		}
 		c.JSON(200, res)
+	})
+	r.GET("/tags", func(c *gin.Context) {
+		tags, err := hub.Tags("coorde/faber")
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(200, tags)
 	})
 	r.Run()
 }
