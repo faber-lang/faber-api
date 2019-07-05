@@ -126,6 +126,10 @@ func compile(ctx context.Context, cli *client.Client, tag, code string) (*Result
 	stderrbuf := new(bytes.Buffer)
 	stderrbuf.ReadFrom(stderr)
 
+	if err := cli.ContainerRemove(ctx, resp.ID, types.ContainerRemoveOptions{}); err != nil {
+		return nil, err
+	}
+
 	return &Result{Stdout: stdoutbuf.String(), Stderr: stderrbuf.String(), ExitCode: int(exitCode)}, nil
 }
 
