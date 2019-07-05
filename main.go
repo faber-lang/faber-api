@@ -81,9 +81,10 @@ func compile(ctx context.Context, cli *client.Client, tag, code string) (*Result
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: imageRef,
 		Cmd: []string{"fabrun", "/faber.fab"},
+		Tty: true,
 	}, &container.HostConfig{
 		Resources: container.Resources{
-			Memory: 10000000,
+			Memory: 50000000,
 			CPUPeriod: 1000000,
 			CPUQuota: 200000,
 			Ulimits: []*units.Ulimit{&units.Ulimit{
