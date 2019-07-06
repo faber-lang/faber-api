@@ -11,6 +11,9 @@ services:
     environment:
     - DOCKER_HOST=tcp://docker:2375
     env_file: .env
+    depends_on:
+    - docker
+    - db
   db:
     image: postgres:11-alpine
     env_file: .env
