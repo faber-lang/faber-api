@@ -1,11 +1,14 @@
 version: '3'
 services:
+  docker:
+    image: docker:18-dind
+    privileged: true
   web:
     build: .
     ports:
     - "8080:8080"
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+    - DOCKER_HOST=tcp://docker:2375
     env_file: .env
   db:
     image: postgres:11-alpine
