@@ -16,7 +16,7 @@ services:
     - "443:443"
     environment:
     - DOCKER_HOST=tcp://docker:2375
-    - FABER_API_AUTOTLS_DOMAIN=faber.coord-e.com
+    - FABER_API_AUTOTLS_DOMAIN=api.faber.coord-e.com
     links:
     - docker
     - db
