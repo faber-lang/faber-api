@@ -4,9 +4,9 @@ set -euo pipefail
 
 # these variables will be set in .env
 # readonly KEYPAIR_NAME="some_keypair"
-# readonly CLUSTER_CONFIG="some_config"
 # readonly INSTANCE_TYPE="t2.small"
 # readonly SIZE=1
+# readonly AWS_REGION=ap-northeast-1
 
 readonly BASE_DIR="$(dirname "$BASH_SOURCE")/.."
 readonly COMPOSE_CONFIG="$BASE_DIR/docker-compose.prod.yml"
@@ -21,6 +21,7 @@ function cluster_up() {
         --size $SIZE \
         --port 443 \
         --instance-type $INSTANCE_TYPE \
+        --region $AWS_REGION
         "$@"
 }
 

@@ -6,8 +6,8 @@ services:
     logging:
       driver: awslogs
       options:
-        awslogs-group: faber-api
-        awslogs-region: ap-northeast-1
+        awslogs-group: $AWS_LOG_GROUP
+        awslogs-region: $AWS_REGION
         awslogs-stream-prefix: docker
   web:
     build: .
@@ -24,8 +24,8 @@ services:
     logging:
       driver: awslogs
       options:
-        awslogs-group: faber-api
-        awslogs-region: ap-northeast-1
+        awslogs-group: $AWS_LOG_GROUP
+        awslogs-region: $AWS_REGION
         awslogs-stream-prefix: web
   db:
     image: postgres:11-alpine
@@ -33,6 +33,6 @@ services:
     logging:
       driver: awslogs
       options:
-        awslogs-group: faber-api
-        awslogs-region: ap-northeast-1
+        awslogs-group: $AWS_LOG_GROUP
+        awslogs-region: $AWS_REGION
         awslogs-stream-prefix: db
