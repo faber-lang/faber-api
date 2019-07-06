@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
 type Entry struct {
@@ -15,7 +15,7 @@ type Entry struct {
 }
 
 func InitDB() (*gorm.DB, error) {
-	db, err := gorm.Open("sqlite3", "test.db")
+	db, err := gorm.Open("postgres", "host=db user=postgres sslmode=disable")
 	if err != nil {
 		return nil, err
 	}
