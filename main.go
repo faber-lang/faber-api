@@ -3,9 +3,10 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
-	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/autotls"
+	"github.com/gin-gonic/gin"
 	"github.com/heroku/docker-registry-client/registry"
 	"github.com/moby/moby/client"
 	"golang.org/x/net/context"
