@@ -86,6 +86,14 @@
   version = "v0.1.0"
 
 [[projects]]
+  digest = "1:23a13d0570f5f5913598ed715496e583f6c1508b89965a51cd5bd6abfb8b3bff"
+  name = "github.com/gin-gonic/autotls"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "0b5f4fc15768a919a40d099fab9c397a704dcecd"
+  version = "0.0.2"
+
+[[projects]]
   digest = "1:d8bd2a337f6ff2188e08f72c614f2f3f0fd48e6a7b37a071b197e427d77d3a47"
   name = "github.com/gin-gonic/gin"
   packages = [
@@ -247,11 +255,23 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:2954b3699dc7d134a2ad3710f170b912bd979c5513cc13d869a57a1d2e753d8b"
+  digest = "1:cb823a5f7777276059b25eaadda6a12892f3beb6d0deee01df0d8f8692ffcc82"
+  name = "golang.org/x/crypto"
+  packages = [
+    "acme",
+    "acme/autocert",
+  ]
+  pruneopts = "UT"
+  revision = "4def268fd1a49955bfb3dda92fe3db4f924f2285"
+
+[[projects]]
+  branch = "master"
+  digest = "1:245d53b2f99588e476ae41158ce15a6039f3eb6039afa2de8e7cc796e7b91a2a"
   name = "golang.org/x/net"
   packages = [
     "context",
     "context/ctxhttp",
+    "idna",
     "internal/socks",
     "proxy",
   ]
@@ -268,6 +288,31 @@
   ]
   pruneopts = "UT"
   revision = "04f50cda93cbb67f2afa353c52f342100e80e625"
+
+[[projects]]
+  digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
+  name = "golang.org/x/text"
+  packages = [
+    "collate",
+    "collate/build",
+    "internal/colltab",
+    "internal/gen",
+    "internal/language",
+    "internal/language/compact",
+    "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
+    "language",
+    "secure/bidirule",
+    "transform",
+    "unicode/bidi",
+    "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable",
+  ]
+  pruneopts = "UT"
+  revision = "342b2e1fbaa52c93f31447ad2c6abc048c63e475"
+  version = "v0.3.2"
 
 [[projects]]
   digest = "1:cbc72c4c4886a918d6ab4b95e347ffe259846260f99ebdd8a198c2331cf2b2e9"
@@ -293,6 +338,7 @@
     "github.com/docker/docker/api/types/container",
     "github.com/docker/docker/pkg/stdcopy",
     "github.com/docker/go-units",
+    "github.com/gin-gonic/autotls",
     "github.com/gin-gonic/gin",
     "github.com/google/uuid",
     "github.com/heroku/docker-registry-client/registry",

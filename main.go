@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/autotls"
 	"github.com/heroku/docker-registry-client/registry"
 	"github.com/moby/moby/client"
 	"golang.org/x/net/context"
@@ -89,5 +90,10 @@ func main() {
 		}
 		c.JSON(200, tags)
 	})
-	r.Run()
+
+	if domain := os.Getenv("FABER_API_AUTOTLS_DOMAIN"); domain != "" {
+		log.Fatal(autotls.Run(r, domain))
+	} else {
+		r.Run()
+	}
 }
