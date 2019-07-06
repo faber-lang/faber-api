@@ -13,7 +13,7 @@ services:
     build: .
     image: coorde/faber-api
     ports:
-    - "443:8080"
+    - "443:443"
     environment:
     - DOCKER_HOST=tcp://docker:2375
     - FABER_API_AUTOTLS_DOMAIN=faber.coord-e.com
