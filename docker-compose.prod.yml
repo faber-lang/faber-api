@@ -17,7 +17,7 @@ services:
     environment:
     - DOCKER_HOST=tcp://docker:2375
     - FABER_API_AUTOTLS_DOMAIN=faber.coord-e.com
-    depends_on:
+    links:
     - docker
     - db
     env_file: .env
