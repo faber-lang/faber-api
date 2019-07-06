@@ -30,7 +30,7 @@ function cluster_down() {
 }
 
 function service_up() {
-    ecs-cli compose -f "$COMPOSE_CONFIG" service up "$@"
+    ecs-cli compose -f "$COMPOSE_CONFIG" service up --create-log-groups "$@"
 }
 
 function service_down() {
