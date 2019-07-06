@@ -5,14 +5,20 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/heroku/docker-registry-client/registry"
 	"github.com/moby/moby/client"
 	"golang.org/x/net/context"
-	"github.com/heroku/docker-registry-client/registry"
 )
 
 type Options struct {
 	Tag  string `json:"tag" binding:"required"`
 	Code string `json:"code" binding:"required"`
+	Save bool   `json:"save"`
+}
+
+type Return struct {
+	Result
+	ID string `json:"id"`
 }
 
 func main() {
@@ -30,6 +36,12 @@ func main() {
 		return
 	}
 
+	db, err := InitDB()
+	if err != nil {
+		log.Fatalf("%v", err)
+		return
+	}
+
 	r := gin.Default()
 	r.POST("/compile", func(c *gin.Context) {
 		var options Options
@@ -42,8 +54,33 @@ func main() {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
-		c.JSON(200, res)
+		ret := Return{Result: *res}
+
+		if options.Save {
+			id, err := Save(db, options, *res)
+			if err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+				return
+			}
+			ret.ID = id
+
+		}
+		c.JSON(200, ret)
 	})
+
+	r.GET("/restore/:id", func(c *gin.Context) {
+		id := c.Param("id")
+		opts, res, err := Restore(db, id)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"options": opts,
+			"result":  res,
+		})
+	})
+
 	r.GET("/tags", func(c *gin.Context) {
 		tags, err := hub.Tags("coorde/faber")
 		if err != nil {

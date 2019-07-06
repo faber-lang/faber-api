@@ -3,15 +3,15 @@ package main
 import (
 	"fmt"
 
-	"github.com/jinzhu/gorm"
 	"github.com/google/uuid"
+	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
 type Entry struct {
-	ID string `gorm:"UNIQUE"`
+	ID      string `gorm:"UNIQUE"`
 	Options Options
-	Result Result
+	Result  Result
 }
 
 func InitDB() (*gorm.DB, error) {
@@ -23,12 +23,12 @@ func InitDB() (*gorm.DB, error) {
 	return db, nil
 }
 
-func Save(db *gorm.DB, opts Options, res *Result) (string, error) {
+func Save(db *gorm.DB, opts Options, res Result) (string, error) {
 	id := uuid.New().String()
 	entry := Entry{
-		ID: id,
+		ID:      id,
 		Options: opts,
-		Result: *res,
+		Result:  res,
 	}
 	db.Create(&entry)
 	return id, nil
