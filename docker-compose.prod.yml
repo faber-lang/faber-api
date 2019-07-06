@@ -1,8 +1,11 @@
-version: '3'
+# using version 2 for the workaround
+# https://github.com/aws/amazon-ecs-cli/issues/537
+version: '2'
 services:
   docker:
     image: docker:18-dind
     privileged: true
+    env_file: .env
     logging:
       driver: awslogs
       options:
