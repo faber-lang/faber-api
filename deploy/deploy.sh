@@ -2,13 +2,16 @@
 
 set -euo pipefail
 
-readonly KEYPAIR_NAME="coordws"
-readonly CLUSTER_CONFIG="faber-api"
-readonly INSTANCE_TYPE="t2.small"
-readonly SIZE=1
+# these variables will be set in .env
+# readonly KEYPAIR_NAME="some_keypair"
+# readonly CLUSTER_CONFIG="some_config"
+# readonly INSTANCE_TYPE="t2.small"
+# readonly SIZE=1
 
-readonly BASE_DIR="$(dirname "$BASH_SOURCE")"
-readonly COMPOSE_CONFIG="$BASE_DIR/../docker-compose.prod.yml"
+readonly BASE_DIR="$(dirname "$BASH_SOURCE")/.."
+readonly COMPOSE_CONFIG="$BASE_DIR/docker-compose.prod.yml"
+
+source "$BASE_DIR/.env"
 
 function cluster_up() {
     ecs-cli up \
