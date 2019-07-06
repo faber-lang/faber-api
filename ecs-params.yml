@@ -2,11 +2,11 @@ version: 1
 task_definition:
   services:
     web:
-      cpu_shares: 100
+      cpu_shares: 40
       mem_limit: 524288000
     docker:
       cpu_shares: 100
       mem_limit: 524288000
     db:
-      cpu_shares: 100
+      cpu_shares: 40
       mem_limit: 524288000
