@@ -93,8 +93,10 @@ func main() {
 	})
 
 	if domain := os.Getenv("FABER_API_AUTOTLS_DOMAIN"); domain != "" {
+		log.Printf("autotls: %s", domain)
 		log.Fatal(autotls.Run(r, domain))
 	} else {
+		log.Print("autotls disabled")
 		r.Run()
 	}
 }
