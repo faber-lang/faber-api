@@ -9,9 +9,9 @@ import (
 )
 
 type Entry struct {
-	ID      string `gorm:"UNIQUE"`
-	Options Options
-	Result  Result
+	ID string `gorm:"UNIQUE"`
+	Options
+	Result
 }
 
 func InitDB() (*gorm.DB, error) {
