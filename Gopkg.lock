@@ -25,7 +25,7 @@
   version = "v2.7.1"
 
 [[projects]]
-  digest = "1:1c58bebf175e3c51fbed39f60dfc1cbea68df7b3a8062678661a30b68ee5fbc1"
+  digest = "1:b2cce986fc28b1f5e3e42f7c67998630ebd115d8a701b1914ea5717d300149c5"
   name = "github.com/docker/docker"
   packages = [
     "api/types",
@@ -42,6 +42,7 @@
     "api/types/time",
     "api/types/versions",
     "api/types/volume",
+    "pkg/stdcopy",
     "pkg/tlsconfig",
   ]
   pruneopts = "UT"
@@ -285,6 +286,7 @@
   input-imports = [
     "github.com/docker/docker/api/types",
     "github.com/docker/docker/api/types/container",
+    "github.com/docker/docker/pkg/stdcopy",
     "github.com/docker/go-units",
     "github.com/gin-gonic/gin",
     "github.com/google/uuid",

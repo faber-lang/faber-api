@@ -6,6 +6,7 @@ import (
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/pkg/stdcopy"
 	units "github.com/docker/go-units"
 	"github.com/moby/moby/client"
 	"golang.org/x/net/context"
@@ -26,28 +27,25 @@ func CopySourceToContainer(ctx context.Context, cli *client.Client, id string, c
 }
 
 func ObtainLogs(ctx context.Context, cli *client.Client, id string) (string, string, error) {
-	stdout, err := cli.ContainerLogs(ctx, id, types.ContainerLogsOptions{ShowStdout: true})
+	reader, err := cli.ContainerLogs(ctx, id, types.ContainerLogsOptions{ShowStdout: true, ShowStderr: true})
 	if err != nil {
 		return "", "", err
 	}
-	stdoutbuf := new(bytes.Buffer)
-	stdoutbuf.ReadFrom(stdout)
+	defer reader.Close()
 
-	stderr, err := cli.ContainerLogs(ctx, id, types.ContainerLogsOptions{ShowStderr: true})
-	if err != nil {
+	stdout := new(bytes.Buffer)
+	stderr := new(bytes.Buffer)
+	if _, err := stdcopy.StdCopy(stdout, stderr, reader); err != nil {
 		return "", "", err
 	}
-	stderrbuf := new(bytes.Buffer)
-	stderrbuf.ReadFrom(stderr)
 
-	return stdoutbuf.String(), stderrbuf.String(), nil
+	return stdout.String(), stderr.String(), nil
 }
 
 func CreateSandboxContainer(ctx context.Context, cli *client.Client, name string) (string, error) {
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: name,
 		Cmd:   []string{"fabrun", "/faber.fab"},
-		Tty:   true,
 	}, &container.HostConfig{
 		Resources: container.Resources{
 			Memory:    50000000,
