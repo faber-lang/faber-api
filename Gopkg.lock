@@ -106,12 +106,39 @@
   version = "v1.3.1"
 
 [[projects]]
+  digest = "1:582b704bebaa06b48c29b0cec224a6058a09c86883aaddabde889cd1a5f73e1b"
+  name = "github.com/google/uuid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "0cd6bf5da1e1c83f8b45653022c74f71af0538a4"
+  version = "v1.1.1"
+
+[[projects]]
   branch = "master"
   digest = "1:2b210e614403360f0922e86caee840c91c96c64db48aecddc33102d212cd949c"
   name = "github.com/heroku/docker-registry-client"
   packages = ["registry"]
   pruneopts = "UT"
   revision = "47ecf50fd8d4fba87593c00ca0959029c7d6b95c"
+
+[[projects]]
+  digest = "1:27f44b9a8c2995c35ec25a9948ffa96f997f8eedbc5bb34838f10dcf620aaee3"
+  name = "github.com/jinzhu/gorm"
+  packages = [
+    ".",
+    "dialects/sqlite",
+  ]
+  pruneopts = "UT"
+  revision = "836fb2c19d84dac7b0272958dfb9af7cf0d0ade4"
+  version = "v1.9.10"
+
+[[projects]]
+  digest = "1:01ed62f8f4f574d8aff1d88caee113700a2b44c42351943fa73cc1808f736a50"
+  name = "github.com/jinzhu/inflection"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "f5c5f50e6090ae76a29240b61ae2a90dd810112e"
+  version = "v1.0.0"
 
 [[projects]]
   digest = "1:f5a2051c55d05548d2d4fd23d244027b59fbd943217df8aa3b5e170ac2fd6e1b"
@@ -136,6 +163,14 @@
   pruneopts = "UT"
   revision = "1311e847b0cb909da63b5fecfb5370aa66236465"
   version = "v0.0.8"
+
+[[projects]]
+  digest = "1:4a49346ca45376a2bba679ca0e83bec949d780d4e927931317904bad482943ec"
+  name = "github.com/mattn/go-sqlite3"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "c7c4067b79cc51e6dfdcef5c702e74b1e0fa7c75"
+  version = "v1.10.0"
 
 [[projects]]
   digest = "1:4b17b21e0f462ee50ca92f81cadabf531f7c4a2d3590cc55b0a9d081059ca61e"
@@ -252,7 +287,10 @@
     "github.com/docker/docker/api/types/container",
     "github.com/docker/go-units",
     "github.com/gin-gonic/gin",
+    "github.com/google/uuid",
     "github.com/heroku/docker-registry-client/registry",
+    "github.com/jinzhu/gorm",
+    "github.com/jinzhu/gorm/dialects/sqlite",
     "github.com/moby/moby/client",
     "golang.org/x/net/context",
   ]
