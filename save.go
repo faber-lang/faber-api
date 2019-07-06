@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
@@ -15,7 +16,9 @@ type Entry struct {
 }
 
 func InitDB() (*gorm.DB, error) {
-	db, err := gorm.Open("postgres", "host=db user=postgres sslmode=disable")
+	pass := os.Getenv("POSTGRES_PASSWORD")
+	opts := fmt.Sprintf("host=db user=postgres sslmode=disable password=%s", pass)
+	db, err := gorm.Open("postgres", opts)
 	if err != nil {
 		return nil, err
 	}
