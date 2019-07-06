@@ -16,8 +16,8 @@ source "$BASE_DIR/.env"
 function cluster_up() {
     ecs-cli up \
         --keypair "$KEYPAIR_NAME" \
-        --capabilty-iam \
-        --lanuch-type EC2 \
+        --capability-iam \
+        --launch-type EC2 \
         --size $SIZE \
         --port 443 \
         --instance-type $INSTANCE_TYPE \
