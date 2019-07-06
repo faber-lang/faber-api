@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"os"
+	"regexp"
 
 	"github.com/docker/docker/api/types"
 	"github.com/moby/moby/client"
@@ -14,6 +16,10 @@ func CanonicalImageName(tag string) string {
 }
 
 func PullImage(ctx context.Context, cli *client.Client, tag string) (string, error) {
+	if match, _ := regexp.MatchString(`^[\w][\w.-]{0,127}$`, tag); !match {
+		return "", fmt.Errorf("invalid tag name: %s", tag)
+	}
+
 	imageRef := CanonicalImageName(tag)
 	reader, err := cli.ImagePull(ctx, imageRef, types.ImagePullOptions{})
 	if err != nil {
