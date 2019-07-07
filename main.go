@@ -11,9 +11,11 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
+	"github.com/google/go-github/github"
 	"github.com/heroku/docker-registry-client/registry"
 	"github.com/moby/moby/client"
 	"golang.org/x/net/context"
+	"golang.org/x/oauth2"
 )
 
 type Options struct {
@@ -41,6 +43,16 @@ func main() {
 		log.Fatalf("%v", err)
 		return
 	}
+
+	var tc *http.Client = nil
+	if token := os.Getenv("FABER_API_GITHUB_TOKEN"); token != "" {
+		ts := oauth2.StaticTokenSource(
+			&oauth2.Token{AccessToken: token},
+		)
+		tc = oauth2.NewClient(ctx, ts)
+	}
+
+	githubClient := github.NewClient(tc)
 
 	db, err := InitDB()
 	if err != nil {
@@ -99,6 +111,15 @@ func main() {
 			return
 		}
 		c.JSON(200, tags)
+	}))
+
+	r.GET("/examples", cache.CachePage(store, time.Minute, func(c *gin.Context) {
+		_, files, _, err := githubClient.Repositories.GetContents(ctx, "coord-e", "faber", "test/data", nil)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(200, files)
 	}))
 
 	if domain := os.Getenv("FABER_API_AUTOTLS_DOMAIN"); domain != "" {
