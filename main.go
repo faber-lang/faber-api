@@ -38,7 +38,7 @@ func main() {
 	}
 
 	url := "https://registry-1.docker.io/"
-	hub, err := registry.New(url, "", "")
+	dockerhubClient, err := registry.New(url, "", "")
 	if err != nil {
 		log.Fatalf("%v", err)
 		return
@@ -50,6 +50,10 @@ func main() {
 			&oauth2.Token{AccessToken: token},
 		)
 		tc = oauth2.NewClient(ctx, ts)
+
+		log.Print("using github API with authenication")
+	} else {
+		log.Print("using github API without authenication")
 	}
 
 	githubClient := github.NewClient(tc)
@@ -105,7 +109,7 @@ func main() {
 	})
 
 	r.GET("/tags", cache.CachePage(store, time.Minute, func(c *gin.Context) {
-		tags, err := hub.Tags("coorde/faber")
+		tags, err := dockerhubClient.Tags("coorde/faber")
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
