@@ -10,10 +10,12 @@ services:
     - "8080:8080"
     environment:
     - DOCKER_HOST=tcp://docker:2375
-    env_file: .env
+    - FABER_API_GITHUB_TOKEN=$FABER_API_GITHUB_TOKEN
+    - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
     depends_on:
     - docker
     - db
   db:
     image: postgres:11-alpine
-    env_file: .env
+    environment:
+    - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
