@@ -4,7 +4,10 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
+	"github.com/gin-contrib/cache"
+	"github.com/gin-contrib/cache/persistence"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
@@ -44,6 +47,8 @@ func main() {
 		log.Fatalf("%v", err)
 		return
 	}
+
+	store := persistence.NewInMemoryStore(time.Minute)
 
 	r := gin.Default()
 
@@ -87,14 +92,14 @@ func main() {
 		})
 	})
 
-	r.GET("/tags", func(c *gin.Context) {
+	r.GET("/tags", cache.CachePage(store, time.Minute, func(c *gin.Context) {
 		tags, err := hub.Tags("coorde/faber")
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 		c.JSON(200, tags)
-	})
+	}))
 
 	if domain := os.Getenv("FABER_API_AUTOTLS_DOMAIN"); domain != "" {
 		log.Printf("autotls: %s", domain)

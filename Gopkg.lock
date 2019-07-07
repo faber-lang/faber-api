@@ -10,6 +10,14 @@
   version = "v0.4.12"
 
 [[projects]]
+  branch = "master"
+  digest = "1:f98385a9b77f6cacae716a59c04e6ac374d101466d4369c4e8cc706a39c4bb2e"
+  name = "github.com/bradfitz/gomemcache"
+  packages = ["memcache"]
+  pruneopts = "UT"
+  revision = "551aad21a6682b95329c1f5bd62ee5060d64f7e8"
+
+[[projects]]
   digest = "1:4165002b6f20cdd11994d0ec9d3265969179ee03415106b95b500ca021e01347"
   name = "github.com/docker/distribution"
   packages = [
@@ -78,6 +86,18 @@
   revision = "aabc10ec26b754e797f9028f4589c5b7bd90dc20"
 
 [[projects]]
+  digest = "1:a9d2cb482dea532b3a8ff626cd175811da7093f2bf8f4654a29f4dfb55a4d9e9"
+  name = "github.com/gin-contrib/cache"
+  packages = [
+    ".",
+    "persistence",
+    "utils",
+  ]
+  pruneopts = "UT"
+  revision = "a69f0b45329b4261342e24178b03084d8b5cc7cf"
+  version = "v1.1.0"
+
+[[projects]]
   digest = "1:cc93dd54278f6c0dd4b43588b3cf2c07b09b2a6dd4e2617edf81aa8946054c1e"
   name = "github.com/gin-contrib/cors"
   packages = ["."]
@@ -121,6 +141,17 @@
   pruneopts = "UT"
   revision = "b5d812f8a3706043e23a9cd5babf2e5423744d30"
   version = "v1.3.1"
+
+[[projects]]
+  digest = "1:38ec74012390146c45af1f92d46e5382b50531247929ff3a685d2b2be65155ac"
+  name = "github.com/gomodule/redigo"
+  packages = [
+    "internal",
+    "redis",
+  ]
+  pruneopts = "UT"
+  revision = "9c11da706d9b7902c6da69c592f75637793fe121"
+  version = "v2.0.0"
 
 [[projects]]
   digest = "1:582b704bebaa06b48c29b0cec224a6058a09c86883aaddabde889cd1a5f73e1b"
@@ -195,6 +226,14 @@
   version = "v0.0.8"
 
 [[projects]]
+  digest = "1:404d5b8e8009389747c8c5583d9c9cc28582c0783a9f47851b012dfc926b9b34"
+  name = "github.com/memcachier/mc"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "d03056eefd08e4d7f92630800bab4e431bc6a5e7"
+  version = "v2.0.1"
+
+[[projects]]
   digest = "1:4b17b21e0f462ee50ca92f81cadabf531f7c4a2d3590cc55b0a9d081059ca61e"
   name = "github.com/moby/moby"
   packages = ["client"]
@@ -244,6 +283,14 @@
   pruneopts = "UT"
   revision = "ba968bfe8b2f7e042a574c888954fccecfa385b4"
   version = "v0.8.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:b32828cd6652ccea275d3ac6617b42f258eff3557068dcadb5cfdedfc6ce228e"
+  name = "github.com/robfig/go-cache"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "9fc39e0dbf62c034ec4e45e6120fc69433a3ec51"
 
 [[projects]]
   digest = "1:04457f9f6f3ffc5fea48e71d62f2ca256637dee0a04d710288e27e05c8b41976"
@@ -346,6 +393,8 @@
     "github.com/docker/docker/api/types/container",
     "github.com/docker/docker/pkg/stdcopy",
     "github.com/docker/go-units",
+    "github.com/gin-contrib/cache",
+    "github.com/gin-contrib/cache/persistence",
     "github.com/gin-contrib/cors",
     "github.com/gin-gonic/autotls",
     "github.com/gin-gonic/gin",
