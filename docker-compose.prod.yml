@@ -19,6 +19,7 @@ services:
     environment:
     - DOCKER_HOST=tcp://docker:2375
     - FABER_API_AUTOTLS_DOMAIN=$FABER_API_AUTOTLS_DOMAIN
+    - FABER_API_GITHUB_TOKEN=$FABER_API_GITHUB_TOKEN
     - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
     links:
     - docker
@@ -32,8 +33,6 @@ services:
   db:
     image: postgres:11-alpine
     environment:
-    - DOCKER_HOST=tcp://docker:2375
-    - FABER_API_AUTOTLS_DOMAIN=$FABER_API_AUTOTLS_DOMAIN
     - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
     logging:
       driver: awslogs
