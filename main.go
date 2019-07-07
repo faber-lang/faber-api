@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
 	"github.com/heroku/docker-registry-client/registry"
@@ -45,6 +46,9 @@ func main() {
 	}
 
 	r := gin.Default()
+
+	r.Use(cors.Default())
+
 	r.POST("/compile", func(c *gin.Context) {
 		var options Options
 		if err := c.ShouldBind(&options); err != nil {
