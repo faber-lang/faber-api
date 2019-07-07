@@ -1,0 +1,42 @@
+# using version 2 for the workaround
+# https://github.com/aws/amazon-ecs-cli/issues/537
+version: '2'
+services:
+  docker:
+    image: docker:18-dind
+    privileged: true
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: $AWS_LOG_GROUP
+        awslogs-region: $AWS_REGION
+        awslogs-stream-prefix: docker
+  web:
+    build: .
+    image: coorde/faber-api
+    ports:
+    - "443:443"
+    environment:
+    - DOCKER_HOST=tcp://docker:2375
+    - FABER_API_AUTOTLS_DOMAIN=$FABER_API_AUTOTLS_DOMAIN
+    - FABER_API_GITHUB_TOKEN=$FABER_API_GITHUB_TOKEN
+    - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    links:
+    - docker
+    - db
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: $AWS_LOG_GROUP
+        awslogs-region: $AWS_REGION
+        awslogs-stream-prefix: web
+  db:
+    image: postgres:11-alpine
+    environment:
+    - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: $AWS_LOG_GROUP
+        awslogs-region: $AWS_REGION
+        awslogs-stream-prefix: db

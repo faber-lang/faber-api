@@ -1,0 +1,21 @@
+version: '3'
+services:
+  docker:
+    image: docker:18-dind
+    privileged: true
+  web:
+    build: .
+    image: coorde/faber-api
+    ports:
+    - "8080:8080"
+    environment:
+    - DOCKER_HOST=tcp://docker:2375
+    - FABER_API_GITHUB_TOKEN=$FABER_API_GITHUB_TOKEN
+    - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    depends_on:
+    - docker
+    - db
+  db:
+    image: postgres:11-alpine
+    environment:
+    - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
