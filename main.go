@@ -119,7 +119,15 @@ func main() {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
-		c.JSON(200, files)
+
+		res := make([]gin.H, len(files))
+		for i, v := range files {
+			res[i] = gin.H{
+				"name": *v.Name,
+				"url":  *v.DownloadURL,
+			}
+		}
+		c.JSON(200, res)
 	}))
 
 	if domain := os.Getenv("FABER_API_AUTOTLS_DOMAIN"); domain != "" {
