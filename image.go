@@ -12,7 +12,7 @@ import (
 )
 
 func CanonicalImageName(tag string) string {
-	return "docker.io/coorde/faber:" + tag
+	return "docker.io/faberlang/faber:" + tag
 }
 
 func PullImage(ctx context.Context, cli *client.Client, tag string) (string, error) {

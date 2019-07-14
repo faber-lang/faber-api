@@ -109,7 +109,7 @@ func main() {
 	})
 
 	r.GET("/tags", cache.CachePage(store, time.Minute, func(c *gin.Context) {
-		tags, err := dockerhubClient.Tags("coorde/faber")
+		tags, err := dockerhubClient.Tags("faberlang/faber")
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
@@ -118,7 +118,7 @@ func main() {
 	}))
 
 	r.GET("/examples", cache.CachePage(store, time.Minute, func(c *gin.Context) {
-		_, files, _, err := githubClient.Repositories.GetContents(ctx, "coord-e", "faber", "test/data", nil)
+		_, files, _, err := githubClient.Repositories.GetContents(ctx, "faber-lang", "faber", "test/data", nil)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return

@@ -13,7 +13,7 @@ services:
         awslogs-stream-prefix: docker
   web:
     build: .
-    image: coorde/faber-api
+    image: faberlang/faber-api
     ports:
     - "443:443"
     environment:
