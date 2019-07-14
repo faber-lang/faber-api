@@ -7,6 +7,7 @@ set -euo pipefail
 # readonly INSTANCE_TYPE="t2.small"
 # readonly SIZE=1
 # readonly AWS_REGION=ap-northeast-1
+# readonly SPOT_PLICE=0.02
 
 readonly BASE_DIR="$(dirname "$BASH_SOURCE")/.."
 readonly COMPOSE_CONFIG="$BASE_DIR/docker-compose.prod.yml"
@@ -21,7 +22,8 @@ function cluster_up() {
         --size $SIZE \
         --port 443 \
         --instance-type $INSTANCE_TYPE \
-        --region $AWS_REGION
+        --region $AWS_REGION \
+        ${SPOT_PRICE:+--spot-price $SPOT_PRICE} \
         "$@"
 }
 
