@@ -1,11 +1,11 @@
 # faber-api
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/coord-e/faber-api)](https://goreportcard.com/report/github.com/coord-e/faber-api)
-![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/coorde/faber-api.svg)
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/coorde/faber-api.svg)
-[![MicroBadger](https://images.microbadger.com/badges/image/coorde/faber-api.svg)](https://microbadger.com/images/coorde/faber-api)
+[![Go Report Card](https://goreportcard.com/badge/github.com/faber-lang/faber-api)](https://goreportcard.com/report/github.com/faber-lang/faber-api)
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/faberlang/faber-api.svg)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/faberlang/faber-api.svg)
+[![MicroBadger](https://images.microbadger.com/badges/image/faberlang/faber-api.svg)](https://microbadger.com/images/faberlang/faber-api)
 
-an online compilation service for [coord-e/faber](https://github.com/coord-e/faber)
+an online compilation service for [faber-lang/faber](https://github.com/faber-lang/faber)
 
 ## deploy your own
 
